@@ -1,0 +1,18 @@
+# General
+.DS_Store
+.env
+.idea
+node_modules/
+dist/
+
+# Backend (Laravel)
+apps/backend/vendor/
+apps/backend/.env
+apps/backend/storage/*.key
+apps/backend/public/storage
+apps/backend/public/hot
+
+# Frontend (Next.js)
+apps/frontend/.next/
+apps/frontend/node_modules/
+apps/frontend/.env.local

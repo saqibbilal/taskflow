@@ -1,5 +1,6 @@
 import { Task } from "@/types/task";
 import { addTask } from "./actions"; // Import the action
+import { deleteTask } from "./actions"; // Import the action
 
 export default async function Home() {
   // We fetch from the Herd URL or localhost
@@ -36,6 +37,17 @@ export default async function Home() {
               <span className={task.is_completed ? "line-through text-gray-400" : "text-slate-700"}>
                 {task.title}
               </span>
+
+                {/* The Delete Form */}
+                <form action={async () => {
+                    'use server';
+                    await deleteTask(task.id);
+                }}>
+                    <button className="text-red-500 hover:text-red-700 text-sm font-medium">
+                        Delete
+                    </button>
+                </form>
+
                   <span className="text-sm px-2 py-1 rounded bg-slate-100">
                 {task.is_completed ? "Done" : "Pending"}
               </span>

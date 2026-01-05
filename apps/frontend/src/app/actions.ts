@@ -18,3 +18,11 @@ export async function addTask(formData: FormData) {
     // This tells Next.js to clear the cache and fetch the list again
     revalidatePath('/');
 }
+
+export async function deleteTask(id: number) {
+    await fetch(`http://backend.test/api/tasks/${id}`, {
+        method: 'DELETE',
+    });
+
+    revalidatePath('/');
+}

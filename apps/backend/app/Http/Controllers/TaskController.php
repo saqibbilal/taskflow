@@ -63,7 +63,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $validated = $request->validate([
+            'is_completed' => 'required|boolean',
+        ]);
+
+        $task->update($validated);
+
+        return response()->json($task);
     }
 
     /**

@@ -24,4 +24,17 @@ export async function deleteTask(id: number) {
     revalidatePath('/');
 }
 
-// We will add toggleTask here next!
+export async function toggleTask(id: number, currentStatus: boolean) {
+    await fetch(`http://backend.test/api/tasks/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            is_completed: !currentStatus
+        }),
+    });
+
+    revalidatePath('/');
+}

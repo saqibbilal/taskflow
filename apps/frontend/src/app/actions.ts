@@ -1,28 +1,27 @@
-'use server' // Crucial! This tells Next.js to run this function ONLY on the server.
+'use server'
 
 import { revalidatePath } from 'next/cache';
 
-export async function addTask(formData: FormData) {
+const API_URL = "http://backend.test/api";
+
+export async function addTask(projectId: number, formData: FormData) {
     const title = formData.get('title');
 
-    // Send the POST request to Laravel
-    await fetch("http://backend.test/api/tasks", {
+    await fetch(`${API_URL}/tasks`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-        body: JSON.stringify({ title }),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ title, project_id: projectId }),
     });
 
-    // This tells Next.js to clear the cache and fetch the list again
     revalidatePath('/');
 }
 
 export async function deleteTask(id: number) {
-    await fetch(`http://backend.test/api/tasks/${id}`, {
+    await fetch(`${API_URL}/tasks/${id}`, {
         method: 'DELETE',
     });
 
     revalidatePath('/');
 }
+
+// We will add toggleTask here next!

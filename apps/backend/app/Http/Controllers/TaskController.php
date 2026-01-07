@@ -32,13 +32,11 @@ class TaskController extends Controller
         // 1. Validate the incoming request
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'project_id' => 'required|exists:projects,id',
         ]);
 
         // 2. Create the task
-        $task = Task::create([
-            'title' => $validated['title'],
-            'is_completed' => false,
-        ]);
+        $task = Task::create($validated);
 
         // 3. Return the created task with a 201 (Created) status code
         return response()->json($task, 201);

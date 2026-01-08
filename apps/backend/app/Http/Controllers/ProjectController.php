@@ -28,7 +28,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "1 ";
+        $validated = $request->validate([
+            'name' => 'required|string|max:255']
+        );
+        echo "2 ";
+        $project = Project::create($validated);
+        echo "3 ";
+        return response()->json($project,201);
     }
 
     /**

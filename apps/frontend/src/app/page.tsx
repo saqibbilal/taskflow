@@ -1,6 +1,7 @@
 import { Project } from "@/types/project"; // Import Project instead
 import { addTask } from "@/app/actions";
 import TaskItem from "@/components/TaskItem";
+import CreateProject from "@/components/CreateProject";
 
 export default async function Home() {
     // Fetch from the NEW projects endpoint
@@ -13,7 +14,10 @@ export default async function Home() {
     return (
         <main className="p-10 font-sans">
             <div className="max-w-2xl mx-auto">
+                <h1 className="text-3xl font-bold text-slate-800 mb-8">TaskFlow</h1>
                 <h1 className="text-3xl font-bold text-slate-800 mb-8">My Projects</h1>
+
+                <CreateProject />
 
                 {projects.map((project) => (
                     <section key={project.id} className="mb-10 bg-white p-6 rounded-xl shadow-sm border">

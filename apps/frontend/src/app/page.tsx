@@ -2,6 +2,7 @@ import { Project } from "@/types/project"; // Import Project instead
 import { addTask } from "@/app/actions";
 import TaskItem from "@/components/TaskItem";
 import CreateProject from "@/components/CreateProject";
+import { deleteProject } from "@/app/actions";
 
 export default async function Home() {
     // Fetch from the NEW projects endpoint
@@ -19,47 +20,53 @@ export default async function Home() {
 
                 <CreateProject />
 
-                {projects.map((project) => (
-                    <section key={project.id} className="mb-10 bg-white p-6 rounded-xl shadow-sm border">
-                        <h2 className="text-xl font-semibold text-blue-600 mb-4">{project.name}</h2>
+                {projects.map((project) => {
+                    // 1. Logic lives here (BEFORE the return)
+                    const totalTasks = project.tasks.length;
+                    const completedTasks = project.tasks.filter((t) => t.is_completed).length;
+                    const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-                        <div className="mt-4 pt-4 border-t">
-                            <form
-                                action={async (formData) => {
+                    // 2. You MUST have a return statement here
+                    return (
+                        <section key={project.id} className="mb-10 bg-white p-6 rounded-xl shadow-sm border">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-xl font-semibold text-slate-800">{project.name}</h2>
+
+                                {/* Project Delete Button */}
+                                <form action={async () => {
                                     'use server';
-                                    await addTask(project.id, formData);
-                                }}
-                                className="flex gap-2"
-                            >
-                                <input
-                                    type="text"
-                                    name="title"
-                                    placeholder="Add task to this project..."
-                                    className="flex-1 border p-2 rounded text-sm"
-                                    required
-                                />
-                                <button type="submit" className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                    Add
-                                </button>
-                            </form>
-                        </div>
+                                    await deleteProject(project.id);
+                                }}>
+                                    <button className="text-xs text-slate-400 hover:text-red-500 transition-colors">
+                                        Delete Project
+                                    </button>
+                                </form>
+                            </div>
 
-                        <div className="divide-y border-t">
-                            {project.tasks.map((task) => (
-                                <div key={task.id} className="py-3 flex items-center justify-between">
-                  <span className={task.is_completed ? "line-through text-gray-400" : ""}>
-                    {task.title}
-                  </span>
-                                    <TaskItem task={task} />
-                                </div>
-                            ))}
+                            {/* Progress Section */}
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-sm font-semibold text-slate-600">Progress</span>
+                                <span className="text-sm font-bold text-blue-600">{progress}%</span>
+                            </div>
 
-                            {project.tasks.length === 0 && (
-                                <p className="py-4 text-gray-400 italic">No tasks in this project yet.</p>
-                            )}
-                        </div>
-                    </section>
-                ))}
+                            <div className="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
+                                <div
+                                    className="bg-blue-600 h-full transition-all duration-500 ease-out"
+                                    style={{ width: `${progress}%` }}
+                                ></div>
+                            </div>
+
+                            {/* Your existing Tasks mapping code goes here */}
+                            <div className="space-y-2">
+                                {project.tasks.map((task) => (
+                                    <TaskItem key={task.id} task={task} />
+                                ))}
+                            </div>
+
+                            {/* Add Task Form... */}
+                        </section>
+                    ); // End of return
+                })}
             </div>
         </main>
     );

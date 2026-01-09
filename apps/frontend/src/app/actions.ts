@@ -52,3 +52,10 @@ export async function addProject(formData: FormData) {
     });
     revalidatePath('/');
 }
+
+export async function deleteProject(id: number) {
+    await fetch(`${API_URL}/projects/${id}`, {
+        method: 'DELETE',
+    });
+    revalidatePath('/');
+}

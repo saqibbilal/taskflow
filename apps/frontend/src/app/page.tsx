@@ -1,8 +1,6 @@
-import {Project} from "@/types/project"; // Import Project instead
-import TaskItem from "@/components/TaskItem";
+import {Project} from "@/types/project";
 import CreateProject from "@/components/CreateProject";
-import DeleteProjectButton from "@/components/DeleteProjectButton";
-import ProgressBar from "@/components/ProgressBar";
+import ProjectCard from "@/components/ProjectCard";
 
 export default async function Home() {
     // Fetch from the NEW projects endpoint
@@ -24,29 +22,7 @@ export default async function Home() {
 
                     // You MUST have a return statement here
                     return (
-                        <section key={project.id} className="mb-10 bg-white p-6 rounded-xl shadow-sm border">
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold text-slate-800">{project.name}</h2>
-
-                                {/* Project Delete Button */}
-                                <DeleteProjectButton
-                                    projectId={project.id}
-                                    projectName={project.name}
-                                />
-                            </div>
-
-                            <ProgressBar total={project.tasks.length}
-                                         completed={project.tasks.filter((t) => t.is_completed).length}/>
-
-                            {/* Your existing Tasks mapping code goes here */}
-                            <div className="space-y-2">
-                                {project.tasks.map((task) => (
-                                    <TaskItem key={task.id} task={task}/>
-                                ))}
-                            </div>
-
-                            {/* Add Task Form... */}
-                        </section>
+                        <ProjectCard key={project.id} project={project}/>
                     ); // End of return
                 })}
             </div>

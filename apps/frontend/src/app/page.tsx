@@ -1,9 +1,8 @@
 import {Project} from "@/types/project"; // Import Project instead
-import {addTask} from "@/app/actions";
 import TaskItem from "@/components/TaskItem";
 import CreateProject from "@/components/CreateProject";
-import {deleteProject} from "@/app/actions";
 import DeleteProjectButton from "@/components/DeleteProjectButton";
+import ProgressBar from "@/components/ProgressBar";
 
 export default async function Home() {
     // Fetch from the NEW projects endpoint
@@ -22,12 +21,8 @@ export default async function Home() {
                 <CreateProject/>
 
                 {projects.map((project) => {
-                    // 1. Logic lives here (BEFORE the return)
-                    const totalTasks = project.tasks.length;
-                    const completedTasks = project.tasks.filter((t) => t.is_completed).length;
-                    const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-                    // 2. You MUST have a return statement here
+                    // You MUST have a return statement here
                     return (
                         <section key={project.id} className="mb-10 bg-white p-6 rounded-xl shadow-sm border">
                             <div className="flex justify-between items-center mb-4">
@@ -40,18 +35,8 @@ export default async function Home() {
                                 />
                             </div>
 
-                            {/* Progress Section */}
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-sm font-semibold text-slate-600">Progress</span>
-                                <span className="text-sm font-bold text-blue-600">{progress}%</span>
-                            </div>
-
-                            <div className="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
-                                <div
-                                    className="bg-blue-600 h-full transition-all duration-500 ease-out"
-                                    style={{width: `${progress}%`}}
-                                ></div>
-                            </div>
+                            <ProgressBar total={project.tasks.length}
+                                         completed={project.tasks.filter((t) => t.is_completed).length}/>
 
                             {/* Your existing Tasks mapping code goes here */}
                             <div className="space-y-2">

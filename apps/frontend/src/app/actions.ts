@@ -4,13 +4,17 @@ import {revalidatePath} from 'next/cache';
 
 const API_URL = "http://backend.test/api";
 
-export async function addTask(projectId: number, formData: FormData) {
-    const title = formData.get('title');
+export async function addTask(formData: FormData) {
+    const title = formData.get('name');
+    const project_id = formData.get('project_id');
 
     await fetch(`${API_URL}/tasks`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-        body: JSON.stringify({title, project_id: projectId}),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ title, project_id }),
     });
 
     revalidatePath('/');

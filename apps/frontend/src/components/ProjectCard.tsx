@@ -2,7 +2,7 @@ import DeleteProjectButton from "@/components/DeleteProjectButton";
 import ProgressBar from "@/components/ProgressBar";
 import TaskItem from "@/components/TaskItem";
 import {Project} from "@/types/project";
-
+import CreateTask from "@/components/CreateTask";
 
 interface Props {
     project: Project
@@ -24,6 +24,8 @@ export default function ProjectCard({project}: Props) {
 
             <ProgressBar total={project.tasks.length}
                          current={project.tasks.filter((t) => t.is_completed).length}/>
+
+            <CreateTask projectId={project.id} />
 
             {/* Your existing Tasks mapping code goes here */}
             <div className="space-y-2">

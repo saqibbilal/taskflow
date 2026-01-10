@@ -1,8 +1,9 @@
-import { Project } from "@/types/project"; // Import Project instead
-import { addTask } from "@/app/actions";
+import {Project} from "@/types/project"; // Import Project instead
+import {addTask} from "@/app/actions";
 import TaskItem from "@/components/TaskItem";
 import CreateProject from "@/components/CreateProject";
-import { deleteProject } from "@/app/actions";
+import {deleteProject} from "@/app/actions";
+import DeleteProjectButton from "@/components/DeleteProjectButton";
 
 export default async function Home() {
     // Fetch from the NEW projects endpoint
@@ -18,7 +19,7 @@ export default async function Home() {
                 <h1 className="text-3xl font-bold text-slate-800 mb-8">TaskFlow</h1>
                 <h1 className="text-3xl font-bold text-slate-800 mb-8">My Projects</h1>
 
-                <CreateProject />
+                <CreateProject/>
 
                 {projects.map((project) => {
                     // 1. Logic lives here (BEFORE the return)
@@ -33,14 +34,10 @@ export default async function Home() {
                                 <h2 className="text-xl font-semibold text-slate-800">{project.name}</h2>
 
                                 {/* Project Delete Button */}
-                                <form action={async () => {
-                                    'use server';
-                                    await deleteProject(project.id);
-                                }}>
-                                    <button className="text-xs text-slate-400 hover:text-red-500 transition-colors">
-                                        Delete Project
-                                    </button>
-                                </form>
+                                <DeleteProjectButton
+                                    projectId={project.id}
+                                    projectName={project.name}
+                                />
                             </div>
 
                             {/* Progress Section */}
@@ -52,14 +49,14 @@ export default async function Home() {
                             <div className="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
                                 <div
                                     className="bg-blue-600 h-full transition-all duration-500 ease-out"
-                                    style={{ width: `${progress}%` }}
+                                    style={{width: `${progress}%`}}
                                 ></div>
                             </div>
 
                             {/* Your existing Tasks mapping code goes here */}
                             <div className="space-y-2">
                                 {project.tasks.map((task) => (
-                                    <TaskItem key={task.id} task={task} />
+                                    <TaskItem key={task.id} task={task}/>
                                 ))}
                             </div>
 

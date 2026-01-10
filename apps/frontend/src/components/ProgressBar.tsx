@@ -1,12 +1,12 @@
 interface Props {
     total: number;
-    completed: number;
+    current: number;
 }
 
-export default function ProgressBar({total, completed}: Props) {
+export default function ProgressBar({total, current}: Props) {
 
     // 1. Logic for the progress bar
-    const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+    const progress = total > 0 ? Math.round((current / total) * 100) : 0;
 
     return (
         <>

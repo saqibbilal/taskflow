@@ -23,7 +23,7 @@ export default function ProjectCard({project}: Props) {
             </div>
 
             <ProgressBar total={project.tasks.length}
-                         completed={project.tasks.filter((t) => t.is_completed).length}/>
+                         current={project.tasks.filter((t) => t.is_completed).length}/>
 
             {/* Your existing Tasks mapping code goes here */}
             <div className="space-y-2">

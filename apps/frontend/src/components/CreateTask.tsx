@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from "react";
 import { addTask } from "@/app/actions";
+import {SubmitButton} from "@/components/SubmitButton";
 
 export default function CreateTask({ projectId }: { projectId: number }) {
     const formRef = useRef<HTMLFormElement>(null);
@@ -24,9 +25,9 @@ export default function CreateTask({ projectId }: { projectId: number }) {
                 className="flex-1 text-sm border-b border-slate-200 focus:border-blue-500 outline-none pb-1"
                 required
             />
-            <button type="submit" className="text-blue-600 text-sm font-bold hover:text-blue-800">
-                Add
-            </button>
+
+            <SubmitButton/>
+
         </form>
     );
 }

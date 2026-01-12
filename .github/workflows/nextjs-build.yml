@@ -1,0 +1,38 @@
+name: Next.js Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: './apps/frontend/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: ./apps/frontend
+
+      - name: Run Build
+        run: pnpm build
+        working-directory: ./apps/frontend
+        env:
+          # We add this to skip ESLint/Type errors for now if you want
+          # but for a "Real" check, we leave it out!
+          NEXT_TELEMETRY_DISABLED: 1

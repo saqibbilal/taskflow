@@ -23,16 +23,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: './apps/frontend/pnpm-lock.yaml'
+          # Since your lockfile is in the root, we point here:
+          cache-dependency-path: 'pnpm-lock.yaml'
 
       - name: Install dependencies
+        # We run this from the root so pnpm can see the workspace lockfile
         run: pnpm install
-        working-directory: ./apps/frontend
 
       - name: Run Build
+        # Now we "travel" into the frontend folder to build the Next.js app
         run: pnpm build
-        working-directory: ./apps/frontend
+        working-directory: apps/frontend
         env:
-          # We add this to skip ESLint/Type errors for now if you want
-          # but for a "Real" check, we leave it out!
+          # Prevents Next.js from sending anonymous data during the CI process
           NEXT_TELEMETRY_DISABLED: 1

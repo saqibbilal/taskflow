@@ -10,3 +10,10 @@ Route::apiResource('projects', ProjectController::class);
 
 // This handles the Tasks list (and we need it to create and delete tasks)
 Route::apiResource('tasks', TaskController::class);
+
+Route::get('/health', function () {
+    return [
+        'db' => config('database.default'),
+        'db_path' => config('database.connections.sqlite.database'),
+    ];
+});

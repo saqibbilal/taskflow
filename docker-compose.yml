@@ -1,0 +1,30 @@
+services:
+  # --- BACKEND SERVICE ---
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: taskflow-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/backend:/var/www
+    networks:
+      - taskflow-network
+
+  # --- FRONTEND SERVICE ---
+  frontend:
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile
+    container_name: taskflow-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    networks:
+      - taskflow-network
+
+networks:
+  taskflow-network:
+    driver: bridge

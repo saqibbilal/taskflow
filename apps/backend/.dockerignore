@@ -1,0 +1,5 @@
+.env
+bootstrap/cache/*.php
+vendor
+node_modules
+storage/framework/sessions/*

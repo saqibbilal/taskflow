@@ -15,40 +15,43 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body className="antialiased overflow-x-hidden">
-        <div className="flex min-h-screen p-4 gap-6">
+        {/* Using flex-col here stacks the Header on top and the Content Area below it */}
+        <body className="antialiased min-h-screen bg-transparent flex flex-col text-white">
+
+        {/* 1. FULL WIDTH HEADER: Placed at the top level of the body */}
+        <header className="glass m-4 p-6 rounded-3xl flex items-center justify-between sticky top-4 z-50">
+            <div className="flex flex-col">
+                        <span className="text-[10px] text-white/60 uppercase tracking-widest font-bold">
+                            Pages / Virtual Reality
+                        </span>
+                <h1 className="text-xl font-bold">Virtual Reality</h1>
+            </div>
+
+            <div className="flex items-center gap-4">
+                <div className="glass px-4 py-2 rounded-full border border-white/10">
+                    <input
+                        type="text"
+                        placeholder="Type here..."
+                        className="bg-transparent border-none outline-none text-xs text-white placeholder:text-white/40 w-32 md:w-48"
+                    />
+                </div>
+                <button className="text-xs font-bold text-white/80 hover:text-white">Sign In</button>
+            </div>
+        </header>
+
+        {/* 2. LOWER CONTAINER: Flex row puts the Sidebar and Main side-by-side */}
+        <div className="flex flex-1 px-4 pb-4 gap-6 overflow-hidden">
+            {/* Sidebar sits on the left, under the header line */}
             <Sidebar />
 
-            <div className="flex-1 flex flex-col gap-6 lg:ml-72">
-                {/* Header matching the breadcrumb style in your html */}
-                <header className="glass flex items-center justify-between p-6 rounded-3xl sticky top-0 z-40">
-                    <div className="flex flex-col">
-                <span className="text-[10px] text-white/60 uppercase tracking-widest font-bold">
-                  Pages / Virtual Reality
-                </span>
-                        <h1 className="text-xl font-bold">Virtual Reality</h1>
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                        <div className="glass px-4 py-2 rounded-full border border-white/10">
-                            <input
-                                type="text"
-                                placeholder="Type here..."
-                                className="bg-transparent border-none outline-none text-xs text-white placeholder:text-white/40 w-32"
-                            />
-                        </div>
-                        <button className="text-xs font-bold text-white/80 hover:text-white">Sign In</button>
-                    </div>
-                </header>
-
-                <main className="pb-10">
-                    {children}
-                </main>
-            </div>
+            {/* Main area for your Widgets and Project Cards */}
+            <main className="flex-1 overflow-y-auto custom-scrollbar">
+                {children}
+            </main>
         </div>
 
-        {/* Animated Plant - Fixed as per styles.css */}
-        <div className="fixed bottom-10 left-10 text-9xl pointer-events-none z-[-1] animate-bounce opacity-40 grayscale filter blur-[1px] hidden xl:block">
+        {/* Decorative Plant from your styles.css */}
+        <div className="fixed bottom-10 left-10 text-9xl pointer-events-none z-[-1] animate-bounce opacity-20 grayscale filter blur-[1px] hidden xl:block">
             🌿
         </div>
         </body>

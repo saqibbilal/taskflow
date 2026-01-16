@@ -15,6 +15,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --breakpoint-4k: 2500px;
 }
 
 :root {
@@ -68,4 +69,35 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
+}
+
+/* 1. MOBILE DEFAULT (Phones) */
+.project-card-size {
+  width: 85vw;           /* Take up most of the phone screen width */
+  min-width: 280px;      /* But don't get too skinny */
+  max-width: 90vw;
+  height: 400px;
+  flex-shrink: 0;        /* Don't let flexbox squish the card */
+}
+
+/* 2. TABLET & 1080p (Your "Sleek" 1080p look)
+   Triggered when screen is wider than 768px */
+@media (min-width: 768px) {
+  .project-card-size {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    height: 400px !important;
+  }
+}
+
+/* 3. 4K / ULTRA HIGH DEF
+   Triggered when screen is wider than 2000px */
+@media (min-width: 2000px) {
+  .project-card-size {
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    height: 550px !important;
+  }
 }

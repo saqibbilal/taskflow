@@ -129,3 +129,15 @@
     line-height: 1.5 !important;
   }
 }
+
+/* Custom Input Sizing & Rounding */
+.task-input-field {
+  border-radius: 8px !important; /* Matches your new TaskItem sharpness */
+  background: rgba(255, 255, 255, 0.03);
+}
+
+@media (min-width: 2000px) {
+  .task-input-field {
+    border-radius: 12px !important;
+  }
+}

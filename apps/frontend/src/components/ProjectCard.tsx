@@ -36,11 +36,11 @@ export default function ProjectCard({ project }: Props) {
                 )}
             </div>
 
-            <div className="pt-4 border-t border-white/10 flex flex-col gap-3 shrink-0">
+            {/* 3. FOOTER (Fixed) */}
+            <div className="pt-4 border-t border-white/10 flex flex-col gap-3 2xl:gap-4 shrink-0">
                 <ProgressBar total={totalCount} current={completedCount} />
-                <div className="bg-white/5 rounded-2xl p-1 border border-white/10 focus-within:border-white/30">
-                    <CreateTask projectId={project.id} />
-                </div>
+
+                <CreateTask projectId={project.id} />
             </div>
         </div>
     );

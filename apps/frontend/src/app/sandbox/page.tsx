@@ -3,6 +3,8 @@ import { Project } from "@/types/project";
 import ProjectCard from "@/components/ProjectCard";
 import { WeatherCard } from "@/components/WeatherCard";
 import { Users, Zap, Target } from "lucide-react";
+import CreateProject from "@/components/CreateProject";
+import ProjectCreationToggle from "@/components/ProjectCreationToggle";
 
 async function getProjects(): Promise<Project[]> {
     // Note: Ensure your Laravel backend is running at this local URL
@@ -75,13 +77,8 @@ export default async function Page() {
                         <ProjectCard key={project.id} project={project} />
                     ))}
 
-                    {/* Empty state "Add Project" placeholder
-                        Uses 'project-card-size' class from globals.css
-                    */}
-                    <div className="glass project-card-size rounded-3xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center text-white/20 hover:text-white/40 hover:border-white/20 cursor-pointer transition-all snap-start shrink-0">
-                        <span className="text-4xl font-light">+</span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest mt-2">New Project</span>
-                    </div>
+                    {/* Empty state "Add Project" placeholder */}
+                    < ProjectCreationToggle />
                 </div>
             </section>
         </div>

@@ -1,32 +1,38 @@
+// src/components/WeatherCard.tsx
 import { CloudSun } from "lucide-react";
 
 export function WeatherCard() {
-    // This is where logic (like fetching temperature) would live later
     const temp = "12°C";
     const desc = "CLOUDY";
 
     return (
-        /* Instead of .weather-card in CSS, we use glass + Tailwind layout */
-        <div className="glass p-8 flex flex-col justify-between min-h-[200px] rounded-3xl relative overflow-hidden transition-all hover:-translate-y-1">
+        /* MATCHED CLASSES:
+           - p-4 lg:p-6 (Synced padding)
+           - min-h-[140px] lg:min-h-[180px] (Synced height)
+           - w-full (Ensures it respects the grid cell)
+        */
+        <div className="glass p-4 lg:p-6 flex flex-col justify-between min-h-[140px] lg:min-h-[180px] rounded-3xl relative overflow-hidden transition-all hover:-translate-y-1 w-full">
 
-            {/* Icon with Argon's orange glow */}
+            {/* Icon - Scaled down slightly for 1080p */}
             <div className="text-orange-400">
-                <CloudSun size={40} />
+                <CloudSun size={32} className="lg:size-[40px]" />
             </div>
 
-            {/* Info section */}
-            <div className="flex flex-col gap-1 mt-4">
-                <span className="text-3xl font-bold text-white">{temp}</span>
-                <span className="text-xs text-white/70 font-medium tracking-widest uppercase">
-          {desc}
-        </span>
+            {/* Info section - Matched typography logic */}
+            <div className="flex flex-col gap-0 lg:gap-1">
+                <span className="text-2xl lg:text-3xl font-bold text-white leading-tight">
+                    {temp}
+                </span>
+                <span className="text-[10px] lg:text-xs text-white/70 font-bold tracking-widest uppercase">
+                    {desc}
+                </span>
             </div>
 
-            {/* The decorative dots from your index.html */}
-            <div className="flex gap-2 mt-4">
-                <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"></span>
-                <span className="w-2 h-2 rounded-full bg-white/30"></span>
-                <span className="w-2 h-2 rounded-full bg-white/30"></span>
+            {/* The decorative dots - Moved to absolute to prevent pushing content */}
+            <div className="absolute top-4 lg:top-6 right-4 lg:right-6 flex gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
             </div>
         </div>
     );

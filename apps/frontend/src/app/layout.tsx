@@ -16,7 +16,17 @@ export default function RootLayout({
     return (
         <html lang="en">
         {/* Using flex-col here stacks the Header on top and the Content Area below it */}
-        <body className="antialiased min-h-screen bg-transparent flex flex-col text-white">
+
+
+
+        <body className="antialiased min-h-screen flex flex-col text-white relative">
+        {/* BACKGROUND IMAGE LAYER */}
+        <div
+            className="fixed inset-0 z-[-2] bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/images/7.jpg')" }}
+        />
+
+
 
         {/* 1. FULL WIDTH HEADER: Placed at the top level of the body */}
         <header className="glass m-4 p-6 rounded-3xl flex items-center justify-between sticky top-4 z-50">

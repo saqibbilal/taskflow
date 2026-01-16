@@ -13,7 +13,7 @@ export default function ProjectCard({ project }: Props) {
 
     return (
         /* We use project-card-size here to force the CSS we just wrote */
-        <div className="glass project-card-size p-5 2xl:p-6 rounded-3xl flex flex-col gap-4 border border-white/10 shadow-2xl transition-all duration-300 hover:translate-y-[-5px] snap-start shrink-0 overflow-hidden">
+        <div className="glass project-card-size p-5 2xl:p-6 rounded-3xl flex flex-col gap-4 border border-white/10 shadow-2xl transition-all hover:translate-y-[-5px] snap-start shrink-0 overflow-hidden animate-in fade-in slide-in-from-right-4 duration-500">
 
             <div className="flex items-center justify-between shrink-0 w-full">
                 <div className="min-w-0 flex-1">

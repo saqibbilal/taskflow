@@ -101,3 +101,31 @@
     height: 550px !important;
   }
 }
+
+/* Force Task Item Slimness */
+.task-item-container {
+  padding-top: 4px !important;    /* py-1 */
+  padding-bottom: 4px !important; /* py-1 */
+  padding-left: 12px !important;  /* px-3 */
+  padding-right: 12px !important; /* px-3 */
+  border-radius: 8px !important;
+}
+
+/* Metadata and Title adjustments for 1080p */
+.task-item-title {
+  font-size: 11px !important;
+  line-height: 1 !important;
+}
+
+/* Restore 4K Comfort */
+@media (min-width: 2000px) {
+  .task-item-container {
+    padding-top: 14px !important;    /* py-3 */
+    padding-bottom: 14px !important; /* py-3 */
+    border-radius: 16px !important;
+  }
+  .task-item-title {
+    font-size: 15px !important; /* text-sm */
+    line-height: 1.5 !important;
+  }
+}

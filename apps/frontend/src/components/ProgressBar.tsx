@@ -10,12 +10,12 @@ export default function ProgressBar({total, current}: Props) {
 
     return (
         <>
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center mb-1">
                 <span className="text-sm font-semibold text-slate-600">Progress</span>
                 <span className="text-sm font-bold text-blue-600">{progress}%</span>
             </div>
 
-            <div className="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
+            <div className="w-full bg-slate-100 h-2.5 rounded-full mb-3 overflow-hidden">
                 <div
                     className="bg-blue-600 h-full transition-all duration-500 ease-out"
                     style={{width: `${progress}%`}}

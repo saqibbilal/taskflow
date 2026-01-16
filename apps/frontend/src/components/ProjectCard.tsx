@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: Props) {
                 </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto pr-1 custom-scrollbar space-y-3">
+            <div className="flex-1 overflow-y-auto pr-1 custom-scrollbar space-y-2">
                 {project.tasks.length > 0 ? (
                     project.tasks.map((task) => <TaskItem key={task.id} task={task} />)
                 ) : (

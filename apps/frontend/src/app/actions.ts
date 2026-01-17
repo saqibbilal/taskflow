@@ -21,9 +21,13 @@ export async function addTask(formData: FormData) {
 }
 
 export async function deleteTask(id: number) {
-    await fetch(`${API_URL}/tasks/${id}`, {
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: 'DELETE',
     });
+
+    if (!response.ok) {
+        throw new Error('Failed to delete task');
+    }
 
     revalidatePath('/');
 }

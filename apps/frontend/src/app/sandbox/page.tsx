@@ -3,7 +3,6 @@ import { Project } from "@/types/project";
 import ProjectCard from "@/components/ProjectCard";
 import { WeatherCard } from "@/components/WeatherCard";
 import { Users, Zap, Target } from "lucide-react";
-import CreateProject from "@/components/CreateProject";
 import ProjectCreationToggle from "@/components/ProjectCreationToggle";
 
 async function getProjects(): Promise<Project[]> {

@@ -1,8 +1,8 @@
 version: 1
 
 applications:
-  - frontend:
-      appRoot: apps/frontend
+  - appRoot: apps/frontend
+    frontend:
       phases:
         preBuild:
           commands:

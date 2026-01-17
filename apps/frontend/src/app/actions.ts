@@ -27,7 +27,7 @@ export async function deleteTask(id: number) {
         throw new Error('Failed to delete task');
     }
 
-    revalidatePath('/');
+    revalidatePath('/');npm run build
 }
 
 export async function toggleTask(id: number, currentStatus: boolean) {

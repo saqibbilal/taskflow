@@ -2,13 +2,11 @@
 
 import {revalidatePath} from 'next/cache';
 
-const API_URL = "http://backend.test/api";
-
 export async function addTask(formData: FormData) {
     const title = formData.get('name');
     const project_id = formData.get('project_id');
 
-    await fetch(`${API_URL}/tasks`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -21,7 +19,7 @@ export async function addTask(formData: FormData) {
 }
 
 export async function deleteTask(id: number) {
-    const response = await fetch(`${API_URL}/tasks/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, {
         method: 'DELETE',
     });
 
@@ -33,7 +31,7 @@ export async function deleteTask(id: number) {
 }
 
 export async function toggleTask(id: number, currentStatus: boolean) {
-    await fetch(`http://backend.test/api/tasks/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -50,7 +48,7 @@ export async function toggleTask(id: number, currentStatus: boolean) {
 export async function addProject(formData: FormData) {
 
     const name = formData.get('name');
-    await fetch(`${API_URL}/projects`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -62,7 +60,7 @@ export async function addProject(formData: FormData) {
 }
 
 export async function deleteProject(id: number) {
-    await fetch(`${API_URL}/projects/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${id}`, {
         method: 'DELETE',
     });
     revalidatePath('/');

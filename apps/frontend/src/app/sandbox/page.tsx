@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import { Project } from "@/types/project";
 import ProjectCard from "@/components/ProjectCard";
 import { WeatherCard } from "@/components/WeatherCard";
@@ -7,7 +6,7 @@ import ProjectCreationToggle from "@/components/ProjectCreationToggle";
 
 async function getProjects(): Promise<Project[]> {
     // Note: Ensure your Laravel backend is running at this local URL
-    const response = await fetch("http://backend.test/api/projects", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, {
         cache: 'no-store'
     });
     return response.json();

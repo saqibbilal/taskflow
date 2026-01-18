@@ -23,13 +23,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # 4. APP CODE
 WORKDIR /var/www
-COPY . .
+COPY apps/backend .
 
 # 5. DEPENDENCIES (CRITICAL)
 RUN composer install \
     --no-dev \
     --optimize-autoloader \
-    --no-interaction
+    --no-interaction \
+    --no-scripts
 
 # 6. PERMISSIONS
 RUN chown -R www-data:www-data /var/www \
@@ -39,7 +40,7 @@ RUN chown -R www-data:www-data /var/www \
 # We no longer need to touch a database.sqlite file here.
 
 # 8. COPY START SCRIPT
-COPY start.sh /start.sh
+COPY apps/backend/start.sh /start.sh
 RUN chmod +x /start.sh
 
 # 9. RUN AS NON-ROOT

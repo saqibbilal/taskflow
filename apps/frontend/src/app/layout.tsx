@@ -32,9 +32,9 @@ export default function RootLayout({
         <header className="glass m-4 p-6 rounded-3xl flex items-center justify-between sticky top-4 z-50">
             <div className="flex flex-col">
                         <span className="text-[10px] text-white/60 uppercase tracking-widest font-bold">
-                            Pages / Virtual Reality
+                            Dashboard /
                         </span>
-                <h1 className="text-xl font-bold">Virtual Reality</h1>
+                <h1 className="text-xl font-bold">Task Flow</h1>
             </div>
 
             <div className="flex items-center gap-4">

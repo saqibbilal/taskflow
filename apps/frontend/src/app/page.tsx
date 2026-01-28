@@ -28,7 +28,7 @@ export default async function Page() {
                 {/* 2. The Stat Widgets (Mapped for perfect consistency) */}
                 {[
                     { label: "Efficiency", value: "88%", desc: "System Performance", icon: <Zap size={20}/>, color: "orange" },
-                    { label: "Team", value: "12", desc: "Active Collaborators", icon: <Users size={20}/>, color: "blue" },
+                    { label: "Team", value: "1", desc: "Active Collaborators", icon: <Users size={20}/>, color: "blue" },
                     { label: "Goals", value: projects.length, desc: "Projects in Progress", icon: <Target size={20}/>, color: "emerald" }
                 ].map((stat, i) => (
                     <div key={i} className="glass p-4 lg:p-6 rounded-3xl flex flex-col justify-between min-h-[140px] lg:min-h-[180px] w-full transition-all">

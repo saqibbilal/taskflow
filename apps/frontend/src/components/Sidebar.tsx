@@ -30,7 +30,7 @@ export function Sidebar() {
                 <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg shadow-lg">
                     <Box size={20} className="text-white"/>
                 </div>
-                <span className="text-sm tracking-tight">Argon Dashboard 2</span>
+                <span className="text-sm tracking-tight">Virtual Workspace</span>
             </div>
 
             {/* Navigation Menu */}
@@ -67,10 +67,10 @@ export function Sidebar() {
                 </div>
                 <h4 className="text-sm font-bold mb-1 text-white">Need help?</h4>
                 <p className="text-[10px] text-white/70 mb-4">
-                    Please check our docs
+                    Please reach out @
                 </p>
                 <button className="w-full py-2 bg-white/20 hover:bg-white/30 rounded-lg text-[10px] font-bold transition-all uppercase tracking-wider text-white">
-                    Documentation
+                    mbilal.ca
                 </button>
             </div>
         </aside>

@@ -60,10 +60,6 @@ export default function RootLayout({
             </main>
         </div>
 
-        {/* Decorative Plant from your styles.css */}
-        <div className="fixed bottom-10 left-10 text-9xl pointer-events-none z-[-1] animate-bounce opacity-20 grayscale filter blur-[1px] hidden xl:block">
-            🌿
-        </div>
         </body>
         </html>
     );

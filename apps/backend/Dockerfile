@@ -1,8 +1,8 @@
-# 1. BASE IMAGE
-FROM php:8.4-fpm-alpine
+# 1. BASE IMAGE (Using CLI because you are using artisan serve)
+FROM php:8.4-cli-alpine
 LABEL authors="Muhammad Saqib Bilal"
 
-# 2. SYSTEM PACKAGES & PHP EXTENSIONS (Updated for Postgres)
+# 2. SYSTEM PACKAGES & PHP EXTENSIONS
 RUN apk add --no-cache \
     postgresql-dev \
     libzip-dev \
@@ -13,10 +13,11 @@ RUN apk add --no-cache \
     oniguruma-dev \
     bash \
     zip \
-    unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-    pdo pdo_pgsql pdo_mysql bcmath zip gd intl mbstring
+    unzip
+
+# Use the helper to install extensions reliably
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions pdo pdo_pgsql bcmath zip gd intl mbstring opcache
 
 # 3. COMPOSER
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -25,7 +26,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY . .
 
-# 5. DEPENDENCIES (CRITICAL)
+# 5. DEPENDENCIES
 RUN composer install \
     --no-dev \
     --optimize-autoloader \
@@ -33,21 +34,17 @@ RUN composer install \
     --no-scripts
 
 # 6. PERMISSIONS
+# On Railway, we ensure the web user owns the files,
+# but we stay root to allow binding to the dynamic port.
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# 7. CLEANUP (Removed SQLite setup, added generic DB check)
-# We no longer need to touch a database.sqlite file here.
-
-# 8. COPY START SCRIPT
+# 7. START SCRIPT
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# 9. RUN AS NON-ROOT
-USER www-data
+# 8. EXPOSE (Railway ignores this but good for documentation)
+EXPOSE 8080
 
-# 10. EXPOSE PORT
-EXPOSE 8000
-
-# 11. START SERVER VIA SCRIPT
+# 9. START SERVER
 CMD ["/start.sh"]

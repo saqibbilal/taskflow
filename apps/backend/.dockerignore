@@ -1,5 +1,28 @@
+# --- Git ---
+.git
+.gitignore
+
+# --- Local Environment ---
 .env
-bootstrap/cache/*.php
+.env.*
+docker-compose.yml
+
+# --- Dependencies (Let Docker install these fresh) ---
 vendor
 node_modules
+
+# --- Build Artifacts & Logs ---
+npm-debug.log
+yarn-error.log
+.phpunit.result.cache
+storage/logs/*.log
+
+# --- Framework Temp Files ---
 storage/framework/sessions/*
+storage/framework/views/*.php
+storage/framework/cache/data/*
+bootstrap/cache/*.php
+
+# --- OS Junk ---
+.DS_Store
+Thumbs.db
